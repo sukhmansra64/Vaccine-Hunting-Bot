@@ -1,0 +1,2 @@
+# Bourgeoisie
+Discord bot

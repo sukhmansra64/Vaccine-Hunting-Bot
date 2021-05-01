@@ -18,7 +18,7 @@ client.on('message',(message)=>{ //event listener to read messages and react acc
         message.author.send(message.content.substr(9)); //sends the message to the user privately
         console.log(message.content.substr(9).substring(0, 3));
         for (let i = 0; i < json["pharmacies"].length; i++) {
-          if (message.content.substr(9).substring(0, 3) === json["pharmacies"][i]["postal_code"].substring(0, 3)) {
+          if (message.content.substr(9).substring(0, 3).toUpperCase() === json["pharmacies"][i]["postal_code"].substring(0, 3)) {
             message.channel.send("-----------------------------------------------------\nPharmacy: " + json["pharmacies"][i]["pharmacy"] + "\n" +
                                  "Address: " + json["pharmacies"][i]["address"] + "\n" +
                                  "City: " + json["pharmacies"][i]["city"] + "\n" +

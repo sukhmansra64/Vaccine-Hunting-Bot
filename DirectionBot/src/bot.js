@@ -11,11 +11,11 @@ client.address=new Map();//makes variable to map to each user (2nd mapped variab
 client.on('message',(message)=>{ //event listener to read messages and react accordingly
     const ID = message.author.id; //makes a constant
     console.log(`[${message.author.tag}]: ${message.content}`); //logs the user and the message
-    if(message.content.includes('-pokes')){  //checks if the message includes the phrase
+    if(message.content.includes('-vaccine')){  //checks if the message includes the phrase
         client.postalCode.set(ID,message.content.substr(6)); //saves string to 1st mapped variable
         message.author.send(message.content.substr(6)); //sends the message to the user privately
     }
-    if(message.content.includes('-cheeks')){ //checks if the message contains the phrase
+    if(message.content.includes('-address')){ //checks if the message contains the phrase
         message.author.send(client.postalCode.get(ID)); //returns the 1st mapped variable
         client.address.set(ID,message.content.substr(7)); //saves string to 2nd mapped variable
     }

@@ -31,16 +31,17 @@ async function apiCall(origin,destination){
 }
 
 function getClosestPharmacy(origin, postalCode, message){
-    //console.log("made it")
+    console.log("made it")
     //console.log(origin);
     var nearByPharmacies = [];
     var shortestDistance = 100;
     var originAddress = origin.replace(" ","+");
     var closestPharmacy = "";
-    //console.log(postalCode);
+    console.log(postalCode);
     //console.log(originAddress);
     for(let i = 0; i < json["pharmacies"].length; i++){
       if (postalCode.toUpperCase() === json["pharmacies"][i]["postal_code"].substring(0, 3)) {
+        console.log(postalCode);
         nearByPharmacies.push(json["pharmacies"][i]["address"]);
       }
     }
@@ -78,7 +79,7 @@ client.on('message',(message)=>{ //event listener to read messages and react acc
     console.log(`[${message.author.tag}]: ${message.content}`); //logs the user and the message
     if(message.content.includes('-vaccine')){  //checks if the message includes the phrase
         client.postalCode.set(ID,message.content.substr(9)); //saves string to 1st mapped variable
-        message.author.send("Input your address with -address if you want to find the closest pharmacy.");
+        message.author.send("Input your address using the address command if you want to find the closest pharmacy.");
         console.log(message.content.substr(9).substring(0, 3));
         for (let i = 0; i < json["pharmacies"].length; i++) {
           if (message.content.substr(9).substring(0, 3).toUpperCase() === json["pharmacies"][i]["postal_code"].substring(0, 3)) {
@@ -95,6 +96,7 @@ client.on('message',(message)=>{ //event listener to read messages and react acc
     if(message.content.includes('-address')){ //checks if the message contains the phrase
         client.address.set(ID,message.content.substr(9)); //saves string to 2nd mapped variable
         //console.log(message.content.substr(9));
+        console.log(client.postalCode.get(ID));
         getClosestPharmacy(message.content.substr(9),client.postalCode.get(ID),message);
     }
 
